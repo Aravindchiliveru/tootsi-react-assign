@@ -31,7 +31,6 @@ function Items() {
 
                 ))}
 
-
                   <hr className="my-4" />
 
                   <div className="pt-5">
