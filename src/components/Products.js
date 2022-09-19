@@ -52,5 +52,31 @@ export const products = [
         categorysize : 'X',
         categorytype : 'Jackets',
 
-    }
+    },
+            {
+        id : 5,
+        name : "Fit Sweatshirt",
+        description : "Top in sweatshirt fabric made from a cotton blend. Relaxed fit with dropped shoulders and ribbing around the neckline, cuffs and hem. Soft brushed inside.",
+        image : <Image src={img} height='70px' preview ={false}  />,
+        price : 300,
+        color : 'Pink',
+        categorysize : 'L',
+        categorytype : 'Joggers',
+        stocksize : 0,
+        buy : 'buy'
+
+    },
+            {
+        id : 6,
+        name : "Fit Sweatshirt",
+        description : "Top in sweatshirt fabric made from a cotton blend. Relaxed fit with dropped shoulders and ribbing around the neckline, cuffs and hem. Soft brushed inside.",
+        image : <Image src={img} height='70px' preview ={false}  />,
+        price : 300,
+        color : 'Pink',
+        categorysize : 'L',
+        categorytype : 'Joggers',
+        stocksize : 0,
+        buy : 'buy'
+
+    },
 ]
