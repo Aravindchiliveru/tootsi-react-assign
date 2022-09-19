@@ -24,12 +24,12 @@ function Items() {
                   <hr className="my-4" />
 
 
-                {basket.map(item =>  {console.log(item.id);
+                {basket.map(item => (
                   <CheckoutProduct id={item.id} image={item.image} name={item.name} categorytype={item.categorytype} price={item.price}  />
 
 
 
-                })}
+                ))}
 
 
                   <hr className="my-4" />
