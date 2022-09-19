@@ -119,11 +119,11 @@ function Cart() {
       title : 'Buy',
       dataIndex : 'id',
       key : 'id',
-      render : id => {
+      render : ide => {
         return <div style={{display : 'flex'}}>
-          <p style={{background : 'rgb(216, 215, 215)',width: '3rem', textAlign: 'center'}}>{id}</p>
+          <p style={{background : 'rgb(216, 215, 215)',width: '3rem', textAlign: 'center'}}>{ide}</p>
           <Link to='/checkout'>
-          <HiOutlineShoppingCart id={id} fontSize='1rem' color='white' style={{background : 'black',cursor:'pointer', width: '3rem', height: '1rem', margin : '5px'}} value={id} onClick={handleCart} />
+          <HiOutlineShoppingCart id={ide} fontSize='1rem' color='white' style={{background : 'black',cursor:'pointer', width: '3rem', height: '1rem', margin : '5px'}} value={ide} onClick={handleCart} />
           </Link>
           <Checkbox />
           </div>
