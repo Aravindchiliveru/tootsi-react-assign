@@ -168,6 +168,7 @@ function Cart() {
   ]
 
 
+  
   return (
     <div>
       <div style={{display : 'flex',flexDirection : 'row'}}>
