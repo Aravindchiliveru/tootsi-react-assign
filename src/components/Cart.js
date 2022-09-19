@@ -186,8 +186,9 @@ function Cart() {
         <Search style={{width :'10rem',justifyContent:'flex-end'}} autoFocus placeholder='Search'
          onChange={e=>setSearchTerm(e.target.value)}
          />
-
+        <Link to='/checkout'>
          <button style={{background :'green',color:'#f4eded',justifyContent:'flex-end'}} onClick= {addItemsToCart}>Add to cart</button>
+          </Link> 
         </div>
                       {products.filter((val)=>{
         if(searchTerm == ""){
