@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Checkbox, Select, Table, Tag } from 'antd'
+import {Checkbox, Image, Select, Table, Tag } from 'antd'
 import { products } from './Products'
 import 'antd/dist/antd.css'
 import {HiOutlineShoppingCart} from 'react-icons/hi'
@@ -35,10 +35,10 @@ function Cart() {
         color : products[ind].color,
         stocksize : products[ind].stocksize,
         categorysize : products[ind].categorysize,
-        categorytype : products[ind].categorytype
+        categorytype : products[ind].categorytype,
+        image : products[ind].image
       }
     })
-
   }
   const handleChangeType = (value) => {
       const newprod = products.filter((product) => {return product.categorytype == value})
@@ -56,6 +56,9 @@ function Cart() {
       title : 'Image',
       dataIndex :'image',
       key : 'id',
+      render : img => {
+        return <Image src={img} height='70px' preview ={false}  />
+      }
     },
     {
       title: 'Name',
@@ -78,9 +81,10 @@ function Cart() {
         {text : 'Pink', value: 'Pink'},
         {text: 'Blue', value: 'Blue'},
         {text : 'Black', value: 'Black'},
-        {text: 'Red', value : 'Red'},
-        {text : 'Yellow', value : 'Yellow'},
-        {text : 'Violet', value : 'Violet'}
+        {text : 'Violet', value : 'Violet'},
+        {text : 'Brown', value : 'Orange'},
+        {text : 'Orange', value : 'Orange'},
+        {text : 'White', value : 'White'}
       ],
       onFilter:(value, record) => {
        return record.color === value

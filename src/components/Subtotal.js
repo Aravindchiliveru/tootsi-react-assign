@@ -1,16 +1,17 @@
 import React from 'react'
 import CurrencyFormat from 'react-currency-format'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
+import { getbasketTotal } from './Reducer'
+import { useStateValue } from './StateProvider'
+
 
 function Subtotal() {
+  const [{basket},dispatch] = useStateValue();
   return (
     <div>
         <CurrencyFormat renderText={(value) => (
-                <div className="d-flex justify-content-between mb-5">
-                <h5 className="text-uppercase">Total price</h5>
-                <h5>0</h5>
-                </div>
-        )} decimalScale={2} value={0} displayType={'text'} thousandSeparator= {true} prefix={'$'} />
+                <h5>{value}</h5>
+        )} decimalScale={2} value={getbasketTotal(basket)} displayType={'text'} thousandSeparator= {true} prefix={'$ '} />
     </div>
   )
 }
