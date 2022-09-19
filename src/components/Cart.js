@@ -6,19 +6,50 @@ import {HiOutlineShoppingCart} from 'react-icons/hi'
 import {FaSmile} from 'react-icons/fa'
 import {HiEmojiSad} from 'react-icons/hi'
 import Search from 'antd/lib/input/Search'
-import { Option } from 'antd/lib/mentions'
 import {BrowserRouter as Router,Link } from 'react-router-dom'
 import { useStateValue } from './StateProvider'
 function Cart() {
-  const Option = Select.Option;
-  const [{basket},dispatch] = useStateValue();
-  console.log(basket);
-  const getCheckedProps = (value) => {
+  const [allProducts, setallProducts] = useState(products)
 
+  const Option = Select.Option;
+
+  const [{basket},dispatch] = useStateValue();
+
+  const [checkedState, setCheckedState] = useState(
+    new Array(allProducts.length).fill(false)
+  );
+
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>{return index === position ? !item : item}   
+    );
+    setCheckedState(updatedCheckedState);
   }
-  const onSearch = (value) => {
-    
+
+  const addItemsToCart = () => {
+    for(let i = 0; i< checkedState.length;i++)
+    {
+      if(checkedState[i])
+      {
+        dispatch({
+        type : 'ADD_TO_BASKET',
+        item:{
+        id : products[i - 1].id,
+        name : products[i - 1].name,
+        description : products[i - 1].description,
+        price : products[i -1].price,
+        color : products[i - 1].color,
+        stocksize : products[i - 1].stocksize,
+        categorysize : products[i - 1].categorysize,
+        categorytype : products[i - 1].categorytype,
+        image : products[i - 1].image
+      }
+    })
+      }
+    }
   }
+
+  const [searchTerm,setSearchTerm] = useState('')
+
   const handleCart = (event) => {
      const id = event.target.getAttribute('id');
       const ind = products.findIndex(el => {
@@ -40,17 +71,21 @@ function Cart() {
       }
     })
   }
+
   const handleChangeType = (value) => {
       const newprod = products.filter((product) => {return product.categorytype == value})
       setallProducts(newprod)
   }
+
   const handleChangeSize = (value) => {
       const newprod = products.filter((product) => {return product.categorysize == value})
       setallProducts(newprod)
   }
+
   const sizes = ['S','M','L','X','XL','XXL']
+
   const types = ['Hoodies', 'SweatShirts', 'Jackets', 'Trousers', 'Formals', 'Joggers']
-  const [allProducts, setallProducts] = useState(products)
+
   const columns = [
     {
       title : 'Image',
@@ -121,15 +156,18 @@ function Cart() {
       key : 'id',
       render : ide => {
         return <div style={{display : 'flex'}}>
-          <p style={{background : 'rgb(216, 215, 215)',width: '3rem', textAlign: 'center'}}>{ide}</p>
+          <p style={{background : 'rgb(216, 215, 215)',width: '3rem', textAlign: 'center'}}>1</p>
           <Link to='/checkout'>
           <HiOutlineShoppingCart id={ide} fontSize='1rem' color='white' style={{background : 'black',cursor:'pointer', width: '3rem', height: '1rem', margin : '5px'}} value={ide} onClick={handleCart} />
           </Link>
-          <Checkbox />
+          <Checkbox value={ide} id={ide} checked={checkedState[ide]}
+                    onChange={() => handleOnChange(ide)} />
           </div>
       }
     }
   ]
+
+
   return (
     <div>
       <div style={{display : 'flex',flexDirection : 'row'}}>
@@ -146,18 +184,25 @@ function Cart() {
       
     </Select>
         <Search style={{width :'10rem',justifyContent:'flex-end'}} autoFocus placeholder='Search'
-         value={''}
-         onChange = {(e) => {}}
-         onPressEnter={() => {}} 
-         onBlur = {() => {}}
-         onSearch = {onSearch}
+         onChange={e=>setSearchTerm(e.target.value)}
          />
-         <button style={{background :'green',color:'#f4eded',justifyContent:'flex-end'}}>Add to cart</button>
+
+         <button style={{background :'green',color:'#f4eded',justifyContent:'flex-end'}} onClick= {addItemsToCart}>Add to cart</button>
         </div>
+                      {products.filter((val)=>{
+        if(searchTerm == ""){
+          return null
+        }
+        else if(val.name.toLowerCase().includes(searchTerm.toLowerCase())){
+          return val;
+        }
+      }).map((val,key)=>{
+        console.log(val)
+        return <div> {val.name} </div>
+      })}
         <Table
          dataSource={allProducts} columns={columns} pagination={true}>
         </Table>
-        {console.log(allProducts)}
     </div>
   )
 }
